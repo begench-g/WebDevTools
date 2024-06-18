@@ -349,32 +349,32 @@
     transform: translateX(-8px);
   }
 }
-@keyframes ShakeVertiacal {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
+@keyframes ShakeVertical {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
 
-  10%,
-  30%,
-  50%,
-  70% {
-    transform: translateX(-10px);
-  }
+	10%,
+	30%,
+	50%,
+	70% {
+		transform: translateY(-8px);
+	}
 
-  20%,
-  40%,
-  60% {
-    transform: translateX(10px);
-  }
+	20%,
+	40%,
+	60% {
+		transform: translateY(8px);
+	}
 
-  80% {
-    transform: translateX(8px);
-  }
+	80% {
+		transform: translateY(6.4px);
+	}
 
-  90% {
-    transform: translateX(-8px);
-  }
+	90% {
+		transform: translateY(-6.4px);
+	}
 }
 
 @keyframes ShakeRotate {
@@ -533,6 +533,7 @@
     transform: rotate(2deg);
   }
 }
+
 @keyframes Vibrate1 {
   0% {
     transform: translate(0);
@@ -628,7 +629,7 @@
     transform: translate(0);
   }
 }
-@keyframes WoobleBottom {
+@keyframes WobbleBottom {
   0%,
   100% {
     transform: translateX(0%);
@@ -656,7 +657,7 @@
   }
 }
 
-@keyframes WoobleLeft {
+@keyframes WobbleLeft {
   0%,
   100% {
     transform: translateY(0) rotate(0);
@@ -710,7 +711,8 @@
     transform: translateY(-6px) rotate(1.2deg);
   }
 }
-@keyframes WoobleTop {
+
+@keyframes WobbleTop {
   0%,
   100% {
     transform: translateX(0%);

@@ -11,11 +11,9 @@ import "./animations.css";
 import React, { useRef } from "react";
 
 const CssAnimationGenerator = () => {
-  const [age, setAge] = React.useState("");
   const [animation, setAnimation] = React.useState("Blink1");
-  const handleChange = (event) => {
-    setAnimation(event.target.value.split(" ").join(""));
-  };
+  const [keyframe, setKeyframe] = React.useState("");
+
   const animatedDivRef = useRef(null);
 
   const getKeyframes = () => {
@@ -31,17 +29,21 @@ const CssAnimationGenerator = () => {
             rule.type === CSSRule.KEYFRAMES_RULE &&
             rule.name === animationName
           ) {
-            console.log("Keyframes:", rule.cssText);
+            console.log("Keyframes:", rule.cssText, setKeyframe(rule.cssText));
             break;
           }
         }
       }
     }
   };
+  const handleChange = (event) => {
+    setAnimation(event.target.value.split(" ").join(""));
+    getKeyframes();
+  };
   return (
-    <div className="bg-white min-h-screen">
+    <div className="min-h-screen">
       <NavBar title={"Box Shadow generator"} />
-      <main className=" max-w-6xl bg-white m-auto">
+      <main className=" max-w-6xl  m-auto">
         <div className="flex flex-col gap-3 mt-10 items-center">
           <h1 className="text-5xl font-extrabold text-center">
             Css animation generator
@@ -50,8 +52,8 @@ const CssAnimationGenerator = () => {
             Create and export beautiful box shadow.
           </p>
         </div>
-        <div className=" flex pt-5">
-          <section className="w-1/2 p-4">
+        <div className=" flex  mt-5  overflow-hidden rounded-lg border-2 border-blue-500">
+          <section className="w-1/2 p-4 bg-white overflow-hidden">
             <div className=" flex justify-center">
               <ButtonGroup
                 size=""
@@ -64,9 +66,12 @@ const CssAnimationGenerator = () => {
               </ButtonGroup>
             </div>
 
-            <div className=" w-full pt-2 flex flex-col gap-2">
+            <div className=" w-full pt-5 flex flex-col gap-2">
               <FormControl>
-                <InputLabel id="demo-simple-select-autowidth-label">
+                <InputLabel
+                  id="demo-simple-select-autowidth-label"
+                  className=" "
+                >
                   Animation type
                 </InputLabel>
                 <Select
@@ -80,7 +85,6 @@ const CssAnimationGenerator = () => {
                   ))}
                 </Select>
               </FormControl>
-              <TextField id="outlined-basic" label="Name" variant="outlined" />
               <div className=" flex w-full gap-2">
                 <TextField
                   id="outlined-basic"
@@ -148,7 +152,6 @@ const CssAnimationGenerator = () => {
                 variant="outlined"
               />
               <FormControl>
-                {" "}
                 <InputLabel id="1">Direction</InputLabel>
                 <Select
                   labelId="demo-simple-select-autowidth-label"
@@ -178,18 +181,29 @@ const CssAnimationGenerator = () => {
               </FormControl>
             </div>
           </section>
-          <section className=" w-1/2 bg-slate-300 p-4">
-            <h2>Preview</h2>
-            <div className=" flex justify-center">
+          <section className=" w-1/2  bg-black">
+            <h2 className=" bg-blue-500 p-2 text-white">Preview</h2>
+            <div className=" flex py-20 justify-center p-5">
               <div
                 ref={animatedDivRef}
-                className=" w-24 h-24 border bg-black "
+                className=" w-24 h-24 border bg-white "
                 style={{
                   animation: `${animation} 2s ease 0ms 1 normal forwards`,
                 }}
               ></div>
             </div>
-            <button onClick={getKeyframes}>Get Keyframes</button>
+            <h2 className=" bg-blue-500 p-2 text-white">
+              Copy this to the element you want to animate.
+            </h2>
+            <pre className=" p-2">
+              <code>{`animation: myAnim 2s ease 0s 1 normal forwards;`}</code>
+            </pre>
+            <h2 className=" bg-blue-500 p-2 text-white">
+              Copy this after the above selector.
+            </h2>
+            <pre className=" p-2 overflow-auto max-h-56">
+              <code>{keyframe}</code>
+            </pre>
           </section>
         </div>
       </main>
